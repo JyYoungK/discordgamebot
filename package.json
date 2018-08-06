@@ -1,0 +1,15 @@
+{
+  "name": "discb2",
+  "description": "A Discord bot coded in Discord.JS, hosted using Heroku.",
+  "version": "1.0.0",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+
+  "author": "Junyoung Kang",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "save": "^2.3.2"
+  }
+}

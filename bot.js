@@ -46,7 +46,7 @@ client.on("message", function(message){
           case "rps":
               var computerChoice = (rpschoice[Math.floor(Math.random() * rpschoice.length)]);
               var compare = function(choice1,choice2){
-              if(choice1=== undefined){
+              if(choice1=== undefined || args2.length > 2){
                     message.channel.send("Hey! If you want to play a r-p-s game with me, you have to tell me" +
                   " what you are going to play. For example try typing, `gamebot: RPS rock`");
               }

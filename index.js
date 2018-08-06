@@ -26,9 +26,6 @@ var loseresponse = [
 ]
 
 var bot = new Discord.Client();
-bot.on("ready", function() {
-   console.log("Ready");
-});
 
 bot.on("message", function(message){
 

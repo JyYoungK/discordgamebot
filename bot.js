@@ -25,9 +25,7 @@ var loseresponse = [
   "YAY! I WON!", "HA! LOSERRR!", "WANT TO PLAY AGAIN? :)", "I WIN!", "Oh no... you lost", "VICTORY IS MINEEE", "WAIT! I WIN!", "EYY LET'S GO AGAIN!", "WOOHOO!", "I WON!!!", "OMG I WIN!", "I wonder if I can win again :)", "I'll take it"
 ]
 
-var bot = new Discord.Client();
-
-bot.on("message", function(message){
+client.on("message", function(message){
 
   if (message.author.equals(bot.user)) return;
   if (message.content == "Hello" || message.content == "hi" || message.content == "hello" || message.content == "Hi") {

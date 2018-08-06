@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const PREFIX = "askbot: ";
-const PREFIX2 = "gamebot: ";
+const PREFIX = "askbot:";
+const PREFIX2 = "gamebot:";
 
 client.on('ready', () => {
     console.log('Gamebot is ready!');

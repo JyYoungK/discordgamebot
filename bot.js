@@ -95,7 +95,7 @@ client.on("message", function(message){
                 message.channel.send("Here are useful functions you can ask me");
                 var embed = new Discord.RichEmbed()
                   .addField("gamebot: info", "Shows all the games I can play!", true)
-                  .addField("gamebot: RPS", "I will play a rock-paper-scissor game with you!", true)
+                  .addField("gamebot: RPS", "I will play rock-paper-scissor game with you!", true)
                   .setColor(0x00FFFF)
                   .setFooter("Was this message helpful?")
                   .setThumbnail(message.author.avatarURL)

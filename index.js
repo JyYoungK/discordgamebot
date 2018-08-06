@@ -29,11 +29,11 @@ var bot = new Discord.Client();
 
 bot.on("message", function(message){
 
-  if (!message.content.startsWith(PREFIX) && !message.content.startsWith(PREFIX2)) return;
   if (message.author.equals(bot.user)) return;
   if (message.content == "Hello" || message.content == "hi" || message.content == "hello" || message.content == "Hi") {
     message.channel.send("Hello!!! I am also a bot! xD")};
-
+    //↓↓↓↓↓↓↓VERY DANGEROUS. THIS HAS TO BE HERE!
+  if (!message.content.startsWith(PREFIX) && !message.content.startsWith(PREFIX2)) return;
   var args = message.content.substring(PREFIX.length).split(" ");
   var args2 = message.content.substring(PREFIX2.length).split(" ");
 

@@ -27,7 +27,7 @@ var loseresponse = [
 
 client.on("message", function(message){
 
-  if (message.author.equals(bot.user)) return;
+  if (message.author.equals(client.user)) return;
   if (message.content == "Hello" || message.content == "hi" || message.content == "hello" || message.content == "Hi") {
     message.channel.send("Hello!!! I am also a bot! xD")};
     //↓↓↓↓↓↓↓VERY DANGEROUS. THIS HAS TO BE HERE!

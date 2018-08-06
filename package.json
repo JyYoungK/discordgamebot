@@ -2,7 +2,7 @@
   "name": "discb2",
   "description": "A Discord bot coded in Discord.JS, hosted using Heroku.",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "bot.js",
   "scripts": {
     "start": "node index.js"
   },

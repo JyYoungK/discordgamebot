@@ -94,8 +94,7 @@ client.on("message", function(message){
                 message.channel.send("Yo! I'm the second bot programmed by Chocolate Rose");
                 message.channel.send("Here are useful functions you can ask me");
                 var embed = new Discord.RichEmbed()
-                  .addField("gamebot: info", "Shows all the game I can play!", true)
-                  .addField("gamebot: noticeme", "I will give you attention!", true)
+                  .addField("gamebot: info", "Shows all the games I can play!", true)
                   .addField("gamebot: RPS", "I will play a rock-paper-scissor game with you!", true)
                   .setColor(0x00FFFF)
                   .setFooter("Was this message helpful?")

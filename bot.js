@@ -4,7 +4,7 @@ const PREFIX = "askbot: ";
 const PREFIX2 = "gamebot: ";
 
 client.on('ready', () => {
-    console.log('I am ready!');
+    console.log('Gamebot is ready!');
 });
 
 client.on('message', message => {

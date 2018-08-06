@@ -46,7 +46,12 @@ client.on("message", function(message){
           case "rps":
               var computerChoice = (rpschoice[Math.floor(Math.random() * rpschoice.length)]);
               var compare = function(choice1,choice2){
-              if(choice1===choice2.toLowerCase()){
+              if(choice1=== undefined){
+                    message.channel.send("Hey! If you want to play a r-p-s game with me, you have to tell me" +
+                  " what you are going to play. For example try typing, `gamebot: RPS rock`");
+              }
+
+              else if(choice1===choice2.toLowerCase()){
                   message.channel.send(computerChoice);
                   message.channel.send("IT'S A TIE!");
               }

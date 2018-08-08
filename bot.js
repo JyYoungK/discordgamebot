@@ -5,6 +5,7 @@ const PREFIX2 = "gamebot: ";
 
 client.on('ready', () => {
     console.log('Gamebot is ready!');
+    client.user.setActivity("Games all day", {type: "PLAYING"});
 });
 
 client.on('message', message => {

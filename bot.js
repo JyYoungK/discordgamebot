@@ -62,8 +62,8 @@ bot.on("message", function(message){
                 message.channel.send("Here are useful functions you can ask me");
                 var embed = new Discord.RichEmbed()
                   .addField("gamebot: info", "Shows all the games I can play!", true)
-                  .addField("!rps:`enter either rock, paper or scissors`", "I will play rock-paper-scissor game with you!", true)
-                  .setColor(0x00FFFF)
+                  .addField("!rps: `enter either rock, paper or scissors`", "I will play rock-paper-scissor game with you!", true)
+                  .setColor(0xff00dc)
                   .setFooter("Was this message helpful?")
                   .setThumbnail(message.author.avatarURL)
                 message.channel.sendEmbed(embed);

@@ -57,7 +57,6 @@ bot.on("message", function(message){
           break;
   }
   switch (args2[0].toLowerCase()) {
-
           case "info":
                 message.channel.send("Yo! I'm the second bot programmed by Chocolate Rose");
                 message.channel.send("Here are useful functions you can ask me");

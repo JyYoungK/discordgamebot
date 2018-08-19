@@ -28,8 +28,10 @@ bot.on('message', message => {
   	}
 });
 
-bot.on("ready", function() {
-   console.log("Ready");
+bot.on("ready", async () => {
+  console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
+  bot.user.setActivity("games all day everyday", {type: "PLAYING"});
+
 });
 
 bot.on("message", function(message){

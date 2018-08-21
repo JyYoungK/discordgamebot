@@ -65,8 +65,8 @@ bot.on("message", function(message){
   }
   switch (args2[0].toLowerCase()) {
           case "info":
-                message.channel.send("Yo! I'm the second bot programmed by Chocolate Rose");
-                message.channel.send("Here are useful functions you can ask me");
+                message.channel.send("Yo! I'm the second bot programmed by Chocolate Rose").then(msg => {msg.delete(60000)});
+                message.channel.send("Here are useful functions you can ask me").then(msg => {msg.delete(60000)});
                 var embed = new Discord.RichEmbed()
                   .addField("gamebot: info", "Shows all the games I can play!", true)
                   .addField("!rps: `enter either rock, paper or scissors`", "I will play rock-paper-scissor game with you!", true)

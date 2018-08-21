@@ -38,8 +38,10 @@ bot.on("message", function(message){
 
 
   if (message.author.equals(bot.user)) return;
-  if (message.content == "Hello" || message.content == "hi" || message.content == "hello" || message.content == "Hi") {
-    message.channel.send("Hello!!! I am also a bot! xD")};
+  if (message.content == "Hello".toLowerCase() || message.content == "Hi".toLowerCase()) {
+    message.channel.send("Hey I am also a bot! xD")};
+  if (message.content == "How are you".toLowerCase() || message.content == "how are u".toLowerCase()) {
+    message.channel.send("I am in a mood for gaming! :)")};
 
   let prefix = botconfig.prefix;
   let messageArray = message.content.split(" ");
@@ -57,6 +59,9 @@ bot.on("message", function(message){
     case "noticeme":
           message.channel.send(message.author.toString() + " I missed you too buddy!");
           break;
+    case "exp":
+          message.channel.send("Hey! I can explain this for you since I know more about this than Choco Bot!");
+          break;
   }
   switch (args2[0].toLowerCase()) {
           case "info":
@@ -68,7 +73,7 @@ bot.on("message", function(message){
                   .setColor(0xff00dc)
                   .setFooter("Was this message helpful?")
                   .setThumbnail(message.author.avatarURL)
-                message.channel.sendEmbed(embed);
+                message.channel.sendEmbed(embed).then(msg => {msg.delete(60000)});
                 break;
   }
 });

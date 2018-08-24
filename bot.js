@@ -173,7 +173,7 @@ bot.on("message", function(message){
                               "Once you reach certain amount of point, you will level up! What is the point of leveling up? Once you reach" +
                               "Level 10, you have a choice to become a VIP! More details on VIP will be explained later but it will be worth it!" +
                               "Also compete for Top 3 Spot on Leaderboard! Leaderboard gets updated every day with displaying only Top 3 most active user" +
-                              "Sounds exciting right? Now hopefully I explained most of it! Well then let's get started!).then(msg => {msg.delete(60000)}));
+                              "Sounds exciting right? Now hopefully I explained most of it! Well then let's get started!").then(msg => {msg.delete(60000)});
           break;
   }
   switch (args2[0].toLowerCase()) {

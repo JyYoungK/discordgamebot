@@ -169,10 +169,10 @@ bot.on("message", function(message){
           break;
     case "exp":
           message.channel.send("Hey! I can explain this for you since I know more about this than Choco Bot! First type `!level` to check your current exp!" + 
-                              "What is exp? Well exp is a unit of measurement used in game. You can earn exp through almost anything! Chatting, sharing pictures, playing games, joining events." +
-                              "Once you reach certain amount of point, you will level up! What is the point of leveling up? Once you reach" +
+                              " What is exp? Well exp is a unit of measurement used in games. You can earn exp through almost anything! Chatting, sharing pictures, playing games, joining events." +
+                              " Once you reach certain amount of point, you will level up! What is the point of leveling up? Once you reach" +
                               "Level 10, you have a choice to become a VIP! More details on VIP will be explained later but it will be worth it!" +
-                              "Also compete for Top 3 Spot on Leaderboard! Leaderboard gets updated every day with displaying only Top 3 most active user" +
+                              " Also compete for Top 3 Spot on Leaderboard! Leaderboard gets updated every day with displaying only Top 3 most active user" +
                               "Sounds exciting right? Now hopefully I explained most of it! Well then let's get started!").then(msg => {msg.delete(60000)});
           break;
   }

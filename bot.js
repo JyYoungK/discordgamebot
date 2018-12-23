@@ -186,7 +186,7 @@ bot.on("message", function(message){
                   .setColor(0xff00dc)
                   .setFooter("Was this message helpful?")
                   .setThumbnail(message.author.avatarURL)
-                message.channel.sendEmbed(embed).then(msg => {msg.delete(60000)});
+                message.channel.send().then(msg => {msg.delete(60000)});
                 break;
   }
 });

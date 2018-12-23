@@ -3,8 +3,9 @@ const PREFIX = "askbot: ";
 const PREFIX2 = "gamebot: ";
 const bot = new Discord.Client();
 const config = require("./config.json");
-const sql = require("sqlite");
-sql.open("./score.sqlite");
+//sql unavailable atm since it's not working
+    //const = require("sqlite");
+//.open("./score.sqlite");
 var opt = ['spock', 'scissors', 'rock', 'paper', 'lizard'];
 var moji = ['Spock, \:vulcan:', 'Scissors, \:scissors:', 'Rock, \:full_moon_with_face:', 'Paper, \:newspaper:', 'Lizard, \:lizard:'];
 var uss = new Array(opt.length);
@@ -55,41 +56,41 @@ bot.on('message', message => {
     }
 
     if (!message.content.startsWith(config.prefix)) return; // Ignore messages that don't start with the prefix
-
-    if (message.content.startsWith(config.prefix + "level")) {
-        sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-        if (!row) return message.reply("Your current level is 0");
-          message.reply(`Your current level is ${row.level}`);
-        });
-    } else if (message.content.startsWith(config.prefix + "points")) {
-        sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
-        if (!row) return message.reply("sadly you do not have any points yet!");
-          message.reply(`you currently have ${row.points} points, good going!`);
-        });
-    }
-    function addp() {
-      sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
-        if (!row) { // Can't find the row.
-          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-        } else { // Can find the row.
-        let curLevel = Math.floor(0.3 * Math.sqrt(row.points + 1));
-        if (curLevel > row.level) {
-            row.level = curLevel;
-            sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
-            message.reply(`Congratulations! You've leveled up to level **${curLevel}**! :tada::tada::tada: `);
-        }
-        sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
-        }
-      }).catch(() => {
-        console.error;
-        sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
-          sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
-        });
-      });
-    }
-    if (rps() === 1) {
-      addp();
-    }
+    //Make it available when sql works
+    // if (message.content.startsWith(config.prefix + "level")) {
+    //     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+    //     if (!row) return message.reply("Your current level is 0");
+    //       message.reply(`Your current level is ${row.level}`);
+    //     });
+    // } else if (message.content.startsWith(config.prefix + "points")) {
+    //     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
+    //     if (!row) return message.reply("sadly you do not have any points yet!");
+    //       message.reply(`you currently have ${row.points} points, good going!`);
+    //     });
+    // }
+    // function addp() {
+    //   sql.get(`SELECT * FROM scores WHERE userId = "${message.author.id}"`).then(row => {
+    //     if (!row) { // Can't find the row.
+    //       sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+    //     } else { // Can find the row.
+    //     let curLevel = Math.floor(0.3 * Math.sqrt(row.points + 1));
+    //     if (curLevel > row.level) {
+    //         row.level = curLevel;
+    //         sql.run(`UPDATE scores SET points = ${row.points + 1}, level = ${row.level} WHERE userId = ${message.author.id}`);
+    //         message.reply(`Congratulations! You've leveled up to level **${curLevel}**! :tada::tada::tada: `);
+    //     }
+    //     sql.run(`UPDATE scores SET points = ${row.points + 1} WHERE userId = ${message.author.id}`);
+    //     }
+    //   }).catch(() => {
+    //     console.error;
+    //     sql.run("CREATE TABLE IF NOT EXISTS scores (userId TEXT, points INTEGER, level INTEGER)").then(() => {
+    //       sql.run("INSERT INTO scores (userId, points, level) VALUES (?, ?, ?)", [message.author.id, 1, 0]);
+    //     });
+    //   });
+    // }
+    // if (rps() === 1) {
+    //   addp();
+    // }
 });
 
 bot.on("ready", async () => {

@@ -56,7 +56,7 @@ bot.on('message', message => {
     }
 
     if (!message.content.startsWith(config.prefix)) return; // Ignore messages that don't start with the prefix
-    //Make it available when sql works
+    //sql unavailable atm since it's not working
     // if (message.content.startsWith(config.prefix + "level")) {
     //     sql.get(`SELECT * FROM scores WHERE userId ="${message.author.id}"`).then(row => {
     //     if (!row) return message.reply("Your current level is 0");
@@ -88,9 +88,10 @@ bot.on('message', message => {
     //     });
     //   });
     // }
-    // if (rps() === 1) {
+     if (rps() === 1) {
+    //sql unavailable atm since it's not working
     //   addp();
-    // }
+     }
 });
 
 bot.on("ready", async () => {

@@ -106,7 +106,186 @@ bot.on("message", function(message){
   if (message.author.equals(bot.user)) return;
   if (message.content == "Hello" || message.content == "hi" || message.content == "hello" || message.content == "Hi") {
     message.channel.send("Hello!!! I am also a bot! xD")};
+if (message.content.startsWith(config.prefix + "dc")) {
+    //Starts the game + SetUp
+      message.reply(`🤖: 'You will now begin a surviving game'`);
 
+      const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
+      const opts = { maxMatches: 1, time: 10000, errors: [ 'time' ] }
+      let playerPosition = random(), hourPosition = random(), minPosition = random(), secPosition = random();
+      let life = 1;
+      let level = 1;
+
+      //Decides the difficulty
+      message.channel.send("🤖: 'Please select the difficulty. 1: Easy👶  2: Hard👹. You have 10 seconds.'");
+
+      message.channel.awaitMessages(filt, opts)
+      .then(col => {
+        const m = col.first().content
+        const val1 = m === "1";
+        const val2 = m === "2";
+        //const val = m === "1" ? true : false
+        if(val1) {
+          message.channel.send("🤖: 'You have selected an easy difficulty👶'");
+          message.channel.send(`🤖: 'You have spawned on position ${playerPosition}'`);
+          game(life, level, playerPosition, hourPosition, minPosition, secPosition);
+        }
+        else {
+          message.channel.send("🤖: 'You have selected a hard difficulty👹. Sorry this mode is currently under a development'");
+        }
+      })
+      .catch(err => {
+        message.channel.send("🤖: 'You took too long! The game has ended 😥'");
+      })
+  }
+
+  function random() {
+    return Math.floor(Math.random() * 11)+1
+  }
+
+  function game(life, level, playerPosition, hourPosition, minPosition, secPosition){
+      //Decides how many space to Move
+      const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
+      const opts = { maxMatches: 1, time: 10000, errors: [ 'time' ] }
+      message.channel.send("🤖: 'Please select your action. 1: Move Once 2: Move Twice. You have 10 seconds.'");
+      message.channel.awaitMessages(filt, opts)
+      .then(col => {
+        const m = col.first().content
+        const val = m === "1" ? true : false
+        if(val) {
+          //Decides the direction
+          message.channel.send("🤖: 'You have moved once'");
+          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down. You have 10 seconds.'");
+          message.channel.awaitMessages(filt, opts)
+          .then(col => {
+            const m = col.first().content
+            const val = m === "1" ? true : false
+            if(val) {
+              playerPosition += 1;
+              message.channel.send("🤖: 'You have moved up👆'");
+            }
+            else {
+              playerPosition -= 1;
+              message.channel.send("🤖: 'You have moved down👇'");
+            }
+
+            move(life, level, playerPosition, hourPosition, minPosition, secPosition);
+          })
+          .catch(err => {
+            message.channel.send("🤖: 'You took too long! The game has ended 😥'");
+          })
+        }
+        else{
+          message.channel.send("🤖: 'You have moved twice'");
+          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down. You have 10 seconds.'");
+          message.channel.awaitMessages(filt, opts)
+          .then(col => {
+            const m = col.first().content
+            const val = m === "1" ? true : false
+            if(val) {
+              playerPosition += 2;
+              message.channel.send("🤖: 'You have moved up👆'");
+            }
+            else {
+              playerPosition -= 2;
+              message.channel.send("🤖: 'You have moved down👇'");
+            }
+
+            move(life, level, playerPosition, hourPosition, minPosition, secPosition);
+          })
+          .catch(err => {
+            message.channel.send("🤖: 'You took too long! The game has ended 😥'");
+          })
+        }
+      })
+      .catch(err => {
+        message.channel.send("🤖: 'You took too long! The game has ended 😥'");
+      })
+    }
+
+
+  function move(life, level, playerPosition, hourPosition, minPosition, secPosition){
+    hourPosition = hourPosition + 1;
+    minPosition = minPosition + 2;
+    secPosition = secPosition + 3;
+
+    if (playerPosition == 13){
+      playerPosition = 1;
+    }
+
+    if (playerPosition == 14) {
+      playerPosition = 2;
+    }
+
+    if (playerPosition == -1){
+      playerPosition = 12;
+    }
+
+    if (playerPosition == -2){
+      playerPosition = 11;
+    }
+
+    if (hourPosition > 12){
+      hourPosition = 1;
+    }
+
+    if (minPosition == 13){
+      minPosition = 1;
+    }
+
+    if (minPosition == 14){
+      minPosition = 2;
+    }
+
+    if (secPosition == 13){
+      secPosition = 1;
+    }
+
+    if (secPosition == 14){
+      secPosition = 2;
+    }
+
+    if (secPosition == 15){
+      secPosition = 3;
+    }
+    message.channel.send(`🤖: 'You are now on position ${playerPosition}'`);
+    fate(life, level, playerPosition, hourPosition, minPosition, secPosition)
+  }
+
+  function fate(life, level, playerPosition, hourPosition, minPosition, secPosition){
+
+
+    if (playerPosition == hourPosition || playerPosition == minPosition || playerPosition == secPosition){
+      life = 0;
+      if (playerPosition == hourPosition){
+        message.channel.send("🤖: 'Sorry you couldn't escape the death from time'");
+        message.channel.send(`🤖: 'You got caught by an hour-clock-hand at ${playerPosition}'`);
+      }
+      if (playerPosition == minPosition){
+        message.channel.send("🤖: 'Sorry you couldn't escape the death from time'");
+        message.channel.send(`🤖: 'You got caught by an minute-clock-hand at ${playerPosition}'`);
+      }
+      if (playerPosition == secPosition){
+        message.channel.send("🤖: 'Sorry you couldn't escape the death from time'");
+        message.channel.send(`🤖: 'You got caught by an second-clock-hand at ${playerPosition}'`);
+      }
+    }
+    else {
+      level ++;
+      life = 1;
+      if (level >10){
+        message.channel.send(`🤖: 'Congratulations~🎉!!! you have finished a game!👑'`);
+        message.channel.send(`🤖: 'You have earned 5000 EXP!'`);
+      }
+      else {
+        // message.channel.send(`Hour on position ${hourPosition}`);
+        // message.channel.send(`Min on position ${minPosition}`);
+        // message.channel.send(`Sec on position ${secPosition}`);
+        message.channel.send(`🤖: 'Congratulations, you are moving on to the level ${level}🔥'`);
+        game(life, level, playerPosition, hourPosition, minPosition, secPosition);
+      }
+    }
+  }
   let prefix = config.prefix;
   let messageArray = message.content.split(" ");
   let cmd = messageArray[0];

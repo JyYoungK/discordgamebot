@@ -111,13 +111,13 @@ if (message.content.startsWith(config.prefix + "dc")) {
       message.reply(`🤖: 'You will now begin a surviving game'`);
 
       const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
-      const opts = { maxMatches: 1, time: 10000, errors: [ 'time' ] }
+      const opts = { maxMatches: 1, time: 20000, errors: [ 'time' ] }
       let playerPosition = random(), hourPosition = random(), minPosition = random(), secPosition = random();
       let life = 1;
       let level = 1;
 
       //Decides the difficulty
-      message.channel.send("🤖: 'Please select the difficulty. 1: Easy👶  2: Hard👹. You have 10 seconds.'");
+      message.channel.send("🤖: 'Please select the difficulty. 1: Easy👶  2: Hard👹. You have 20 seconds.'");
 
       message.channel.awaitMessages(filt, opts)
       .then(col => {
@@ -146,8 +146,8 @@ if (message.content.startsWith(config.prefix + "dc")) {
   function game(life, level, playerPosition, hourPosition, minPosition, secPosition){
       //Decides how many space to Move
       const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
-      const opts = { maxMatches: 1, time: 10000, errors: [ 'time' ] }
-      message.channel.send("🤖: 'Please select your action. 1: Move Once 2: Move Twice. You have 10 seconds.'");
+      const opts = { maxMatches: 1, time: 20000, errors: [ 'time' ] }
+      message.channel.send("🤖: 'Please select your action. 1: Move Once 2: Move Twice. You have 20 seconds.'");
       message.channel.awaitMessages(filt, opts)
       .then(col => {
         const m = col.first().content
@@ -155,7 +155,7 @@ if (message.content.startsWith(config.prefix + "dc")) {
         if(val) {
           //Decides the direction
           message.channel.send("🤖: 'You have moved once'");
-          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down. You have 10 seconds.'");
+          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down. You have 20 seconds.'");
           message.channel.awaitMessages(filt, opts)
           .then(col => {
             const m = col.first().content
@@ -177,7 +177,7 @@ if (message.content.startsWith(config.prefix + "dc")) {
         }
         else{
           message.channel.send("🤖: 'You have moved twice'");
-          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down. You have 10 seconds.'");
+          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down. You have 20 seconds.'");
           message.channel.awaitMessages(filt, opts)
           .then(col => {
             const m = col.first().content

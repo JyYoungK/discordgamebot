@@ -106,7 +106,7 @@ bot.on("message", function(message){
   if (message.author.equals(bot.user)) return;
   if (message.content == "Hello" || message.content == "hi" || message.content == "hello" || message.content == "Hi") {
     message.channel.send("Hello!!! I am also a bot! xD")};
-if (message.content.startsWith(config.prefix + "dc")) {
+if (message.content.startsWith(config.prefix + "clock")) {
     //Starts the game + SetUp
       message.reply(`🤖: 'You will now begin a surviving game'`);
 

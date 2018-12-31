@@ -112,12 +112,13 @@ if (message.content.startsWith(config.prefix + "clock")) {
 
       const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
       const opts = { maxMatches: 1, time: 20000, errors: [ 'time' ] }
-      let playerPosition = random(), hourPosition = random(), minPosition = random(), secPosition = random();
+      let playerPosition = random(), hourPosition = random(), minPosition = random(), secPosition = random(), bot1 = random(), bot2 = random(), bot3 = random(), bot4 = random(), bot5 = random();
       let life = 1;
       let level = 1;
 
       //Decides the difficulty
-      message.channel.send("🤖: 'Please select the difficulty. 1: Easy👶  2: Hard👹. You have 20 seconds.'");
+      message.channel.send("🤖: 'Please select the difficulty. 1: Easy👶[+2000 EXP]  2: Hard👹[+5000 EXP]'");
+      message.channel.send("You have 20 seconds");
 
       message.channel.awaitMessages(filt, opts)
       .then(col => {
@@ -128,7 +129,14 @@ if (message.content.startsWith(config.prefix + "clock")) {
         if(val1) {
           message.channel.send("🤖: 'You have selected an easy difficulty👶'");
           message.channel.send(`🤖: 'You have spawned on position ${playerPosition}'`);
-          game(life, level, playerPosition, hourPosition, minPosition, secPosition);
+          if (playerPosition-1 == hourPosition || playerPosition-1 == minPosition || playerPosition-1 == secPosition || playerPosition+1 == hourPosition || playerPosition+1 == minPosition || playerPosition+1 == secPosition){
+            message.channel.send(`🤖: 'Watch out! There is something near you'`);
+          }
+          else{
+            message.channel.send(`🤖: 'It seems like there isn't anything near you yet'`);
+          }
+
+          game(bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
         }
         else {
           message.channel.send("🤖: 'You have selected a hard difficulty👹. Sorry this mode is currently under a development'");
@@ -143,11 +151,12 @@ if (message.content.startsWith(config.prefix + "clock")) {
     return Math.floor(Math.random() * 11)+1
   }
 
-  function game(life, level, playerPosition, hourPosition, minPosition, secPosition){
+  function game(bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
       //Decides how many space to Move
       const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
       const opts = { maxMatches: 1, time: 20000, errors: [ 'time' ] }
-      message.channel.send("🤖: 'Please select your action. 1: Move Once 2: Move Twice. You have 20 seconds.'");
+      message.channel.send("🤖: 'Please select your action. 1: Move Once 2: Move Twice'");
+      message.channel.send("You have 20 seconds");
       message.channel.awaitMessages(filt, opts)
       .then(col => {
         const m = col.first().content
@@ -155,7 +164,8 @@ if (message.content.startsWith(config.prefix + "clock")) {
         if(val) {
           //Decides the direction
           message.channel.send("🤖: 'You have moved once'");
-          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down. You have 20 seconds.'");
+          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down'");
+          message.channel.send("You have 20 seconds");
           message.channel.awaitMessages(filt, opts)
           .then(col => {
             const m = col.first().content
@@ -169,7 +179,7 @@ if (message.content.startsWith(config.prefix + "clock")) {
               message.channel.send("🤖: 'You have moved down👇'");
             }
 
-            move(life, level, playerPosition, hourPosition, minPosition, secPosition);
+            move(bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
           })
           .catch(err => {
             message.channel.send("🤖: 'You took too long! The game has ended 😥'");
@@ -177,7 +187,8 @@ if (message.content.startsWith(config.prefix + "clock")) {
         }
         else{
           message.channel.send("🤖: 'You have moved twice'");
-          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down. You have 20 seconds.'");
+          message.channel.send("🤖: 'Please select the direction to move. 1: Move Up 2: Move Down'");
+          message.channel.send("You have 20 seconds");
           message.channel.awaitMessages(filt, opts)
           .then(col => {
             const m = col.first().content
@@ -191,7 +202,8 @@ if (message.content.startsWith(config.prefix + "clock")) {
               message.channel.send("🤖: 'You have moved down👇'");
             }
 
-            move(life, level, playerPosition, hourPosition, minPosition, secPosition);
+
+            move(bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
           })
           .catch(err => {
             message.channel.send("🤖: 'You took too long! The game has ended 😥'");
@@ -204,7 +216,7 @@ if (message.content.startsWith(config.prefix + "clock")) {
     }
 
 
-  function move(life, level, playerPosition, hourPosition, minPosition, secPosition){
+  function move(bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
     hourPosition = hourPosition + 1;
     minPosition = minPosition + 2;
     secPosition = secPosition + 3;
@@ -248,31 +260,71 @@ if (message.content.startsWith(config.prefix + "clock")) {
     if (secPosition == 15){
       secPosition = 3;
     }
-    message.channel.send(`🤖: 'You are now on position ${playerPosition}'`);
-    fate(life, level, playerPosition, hourPosition, minPosition, secPosition)
+
+    if (bot1 == 13){
+      bot1 = 1;
+    }
+
+    if (bot2 == 13){
+      bot2 = 1;
+    }
+
+    if (bot3 == 13){
+      bot3 = 1;
+    }
+
+    if (bot4 == 13){
+      bot4 = 1;
+    }
+
+    if (bot5 == 13){
+      bot5 = 1;
+    }
+    //message.channel.send(`🤖: 'You are now on position ${playerPosition}'`);
+    fate(bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
   }
 
-  function fate(life, level, playerPosition, hourPosition, minPosition, secPosition){
+  function fate(bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
 
+    message.channel.send(`🤖: -------Dead or Alive Report-------`);
 
     if (playerPosition == hourPosition || playerPosition == minPosition || playerPosition == secPosition){
-      life = 0;
+
+      if (bot1 == hourPosition || bot1 == minPosition || bot1 == secPosition ){
+        message.channel.send(`🤖: 'Alistar🐮 died at position ${playerPosition}'`);
+      }
+
+      if (bot2 == hourPosition || bot2 == minPosition || bot2 == secPosition ){
+        message.channel.send(`🤖: 'Wukong🐵 died at position ${playerPosition}'`);
+      }
+
+      if (bot3 == hourPosition || bot3 == minPosition || bot3 == secPosition ){
+        message.channel.send(`🤖: 'Mundo🧟 died at position ${playerPosition}'`);
+      }
+
+      if (bot4 == hourPosition || bot4 == minPosition || bot4 == secPosition ){
+        message.channel.send(`🤖: 'Udyr🐻 died at position ${playerPosition}'`);
+      }
+
+      if (bot5 == hourPosition || bot5 == minPosition || bot5 == secPosition ){
+        message.channel.send(`🤖: 'Rengar🦁 died at position ${playerPosition}'`);
+      }
+
       if (playerPosition == hourPosition){
-        message.channel.send("🤖: 'Sorry you couldn't escape the death from time'");
+        message.channel.send("🤖: 'Oops! Sorry you couldn't escape the death from time'");
         message.channel.send(`🤖: 'You got caught by an hour-clock-hand at ${playerPosition}'`);
       }
       if (playerPosition == minPosition){
-        message.channel.send("🤖: 'Sorry you couldn't escape the death from time'");
+        message.channel.send("🤖: 'Oops! Sorry you couldn't escape the death from time'");
         message.channel.send(`🤖: 'You got caught by an minute-clock-hand at ${playerPosition}'`);
       }
       if (playerPosition == secPosition){
-        message.channel.send("🤖: 'Sorry you couldn't escape the death from time'");
+        message.channel.send("🤖: 'Oops! Sorry you couldn't escape the death from time'");
         message.channel.send(`🤖: 'You got caught by an second-clock-hand at ${playerPosition}'`);
       }
     }
     else {
       level ++;
-      life = 1;
       if (level >10){
         message.channel.send(`🤖: 'Congratulations~🎉!!! you have finished a game!👑'`);
         message.channel.send(`🤖: 'You have earned 5000 EXP!'`);
@@ -281,8 +333,8 @@ if (message.content.startsWith(config.prefix + "clock")) {
         // message.channel.send(`Hour on position ${hourPosition}`);
         // message.channel.send(`Min on position ${minPosition}`);
         // message.channel.send(`Sec on position ${secPosition}`);
-        message.channel.send(`🤖: 'Congratulations, you are moving on to the level ${level}🔥'`);
-        game(life, level, playerPosition, hourPosition, minPosition, secPosition);
+        message.channel.send(`🤖: 'Congratulations you survived level ${level-1}, you are moving on to the level ${level}🔥'`);
+        game(bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
       }
     }
   }

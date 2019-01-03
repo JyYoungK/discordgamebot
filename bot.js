@@ -187,6 +187,11 @@ bot.on("message", function(message){
       if (bot2+1 == hourPosition ||bot2+1 == minPosition || bot2+1 == secPosition){
         message.channel.send("🐵: 'Been waiting for this!'" + "\n🐵: 'I will tell you that something is right above us!'" + "\n😁: 'OMG Thank you Wukong!'");
       }
+        
+      else if (bot2-1 == hourPosition ||bot2-1 == minPosition || bot2-1 == secPosition){
+        message.channel.send("🐵: 'Been waiting for this!'" + "\n🐵: 'I will tell you that something is right below me!'" + "\n😁: 'OMG Thank you Wukong!'");
+      }
+
       else {
         message.channel.send("🐵: 'Hey there! I will tell you that nothing has passed me recently'" + "\n😁: 'OMG Thank you Wukong!'");
       }

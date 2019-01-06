@@ -148,7 +148,7 @@ bot.on("message", function(message){
         const val1 = m === "1";
         const val2 = m === "2";
         if(val1) {
-          message.channel.send("🤖: 'Okay, let's go over some rules" + `\nYou are trapped inside a clock 🕰️` + `\n(The position goes from 1~12)` + `\nYour goal is to survive certain amount of levels (depending on the difficutly)`
+          message.channel.send("🤖: 'Okay, let's go over some rules." + `\nYou are trapped inside a clock 🕰️` + `\n(The position goes from 1~12)` + `\nYour goal is to survive certain amount of levels (depending on the difficutly)`
           + `\nThere are 3️⃣ main things to avoid. An hour-hand clock moves up once, a minute-hand moves up twice, a second-hand moves up three times every turn.`
           + `\nIf your position matches with any of the clock at the end of the turn, you will die 💀.`
           + `\nBefore the clock moves, you get to choose either to move up ☝️ or down 👇, and either by once 1️⃣ or twice 2️⃣ every turn.`

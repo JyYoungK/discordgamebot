@@ -106,7 +106,7 @@ bot.on("message", function(message){
   if (message.author.equals(bot.user)) return;
   if (message.content == "Hello" || message.content == "hi" || message.content == "hello" || message.content == "Hi") {
     message.channel.send("Hello!!! I am also a bot! xD")};
-    if (message.content.startsWith(config.prefix + "clock")) {
+   if (message.content.startsWith(config.prefix + "clock")) {
     //Starts the game + SetUp
 
       //assign clock positions
@@ -138,9 +138,9 @@ bot.on("message", function(message){
 
       message.reply(`🤖: 'You will now begin a surviving game'`);
       const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
-      const opts = { maxMatches: 1, time: 30000, errors: [ 'time' ] }
-      //Decides the difficulty
-      message.channel.send("🤖: 'Please select the difficulty. " + "\n1: Easy👶[5 Levels, Shows your starting position, +2000 EXP]" + "\n2: Hard👹[10 Levels, Does not show your starting position, +7000 EXP]" +  "\nYou have 30 seconds");
+      const opts = { maxMatches: 1, time: 60000, errors: [ 'time' ] }
+      const opts2 = { maxMatches: 1, time: 300000, errors: [ 'time' ] }
+      message.channel.send("🤖: 'Do you wish to go over a rule?'" + '\n1: Yes' + '\n2: No');
 
       message.channel.awaitMessages(filt, opts)
       .then(col => {
@@ -148,30 +148,85 @@ bot.on("message", function(message){
         const val1 = m === "1";
         const val2 = m === "2";
         if(val1) {
-          message.channel.send("🤖: 'You have selected an easy difficulty👶'" + `\n🤖: 'You have spawned on position ${playerPosition}'`);
-          difficulty = 1;
-          if (playerPosition == hourPosition || playerPosition == minPosition || secPosition == hourPosition || playerPosition-1 == hourPosition || playerPosition-1 == minPosition || playerPosition-1 == secPosition || playerPosition+1 == hourPosition || playerPosition+1 == minPosition || playerPosition+1 == secPosition){
-            message.channel.send(`🤖: ⚠️!!! WARNING!!!⚠️` + `\n'Watch out! There is something near you'`);
-          }
-          else{
-            message.channel.send(`🤖: 'It seems like there isn't anything near you yet'`);
-          }
+          message.channel.send("🤖: 'Okay, let's go over some rules" + `\nYou are trapped inside a clock 🕰️` + `\n(The position goes from 1~12)` + `\nYour goal is to survive certain amount of levels (depending on the difficutly)`
+          + `\nThere are 3️⃣ main things to avoid. An hour-hand clock moves up once, a minute-hand moves up twice, a second-hand moves up three times every turn.`
+          + `\nIf your position matches with any of the clock at the end of the turn, you will die 💀.`
+          + `\nBefore the clock moves, you get to choose either to move up ☝️ or down 👇, and either by once 1️⃣ or twice 2️⃣ every turn.`
+          + `\nTip on how to survive 💁 : you would need to be aware of where the clock hands are, and your current position.`
+          + `\nTo help you with survival, you are given 3 flashlights 💡.`
+          + `\nYou get to use flashlight to check your surroundings.`
+          + `\nThe surroundings could either show a clock-hand or animals.`
+          + `\nAll animals 🐖 have different abilities and tell youg different things. They are there to either help you or harm you. You find out which one is the bad one! 😉`
+          + `\nLastly, when you walk around, you might step on something 🤔.`
+          + `\nIt could be another flashlight or a snake🐍 !`
+          + `\nYou probably don't want to get bit by a snake because they are painful! 😥`
+          + `\nThis game will test your decision making and how smart you are 🧠.`
+          + `\nIf you think you are brave enough to test your knowledge, let's try it 🤩 !!!`
+          + `\nType anything to start.`
+          + "\n`-This game will shut down in 5 minutes if you don't respond-`")
 
+          message.channel.awaitMessages(filt, opts2)
+          .then(col => {
+            if (val1){
+              setUp(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
+            }
+            else {
+              setUp(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
+            }
+          }).catch(err => {
+                message.channel.send("🤖: 'You took too long! The game has ended 😥'");
+            })
         }
-        else {
-          message.channel.send("🤖: 'You have selected a hard difficulty👹'" + `\n🤖: 'No extra hints will be given'`);
-          difficulty = 2;
+        else if (val2){
+          setUp(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
         }
-        check(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
       })
       .catch(err => {
         message.channel.send("🤖: 'You took too long! The game has ended 😥'");
       })
   }
 
+  function setUp(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
+    const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
+    const opts = { maxMatches: 1, time: 60000, errors: [ 'time' ] }
+
+    //Decides the difficulty
+    message.channel.send("🤖: 'Please select the difficulty. " + "\n1: Easy👶[5 Levels, Shows your starting position, +2000 EXP]" + "\n2: Hard👹[10 Levels, Does not show your starting position, +7000 EXP]" +  "\n`You have a minute to decide`");
+
+    message.channel.awaitMessages(filt, opts)
+    .then(col => {
+      const m = col.first().content
+      const val1 = m === "1";
+      const val2 = m === "2";
+      if(val1) {
+        message.channel.send("🤖: 'You have selected an easy difficulty👶'" + `\n🤖: 'You have spawned on position ${playerPosition}'`);
+        difficulty = 1;
+        if (playerPosition == hourPosition || playerPosition == minPosition || secPosition == hourPosition || playerPosition-1 == hourPosition || playerPosition-1 == minPosition || playerPosition-1 == secPosition || playerPosition+1 == hourPosition || playerPosition+1 == minPosition || playerPosition+1 == secPosition){
+          message.channel.send(`🤖: ⚠️!!! WARNING!!!⚠️` + `\n'Watch out! There is something near you'`);
+          message.channel.send(`😣: I can hear the clock... but I can't tell if it's coming from above, below, or here because of echo...'`);
+        }
+        else{
+          message.channel.send(`🤖: 'It seems like there isn't anything near you yet'`);
+        }
+
+      }
+      else {
+        message.channel.send("🤖: 'You have selected a hard difficulty👹'" + `\n🤖: 'No extra hints will be given'`);
+        difficulty = 2;
+      }
+      check(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
+    })
+    .catch(err => {
+      message.channel.send("🤖: 'You took too long! The game has ended 😥'");
+    })
+  }
+
   //Generates random values from 1~12
   function random() {
     return Math.floor(Math.random() * 11)+1
+  }
+  function random3() {
+    return Math.floor(Math.random() * 2)+1
   }
 
   function quote1(bot1) {
@@ -185,9 +240,9 @@ bot.on("message", function(message){
   function quote2(bot2, hourPosition, minPosition, secPosition) {
     if (bot2>0){
       if (bot2+1 == hourPosition ||bot2+1 == minPosition || bot2+1 == secPosition){
-        message.channel.send("🐵: 'Been waiting for this!'" + "\n🐵: 'I will tell you that something is right above us!'" + "\n😁: 'OMG Thank you Wukong!'");
+        message.channel.send("🐵: 'Been waiting for this!'" + "\n🐵: 'I will tell you that something is right above me!'" + "\n😁: 'OMG Thank you Wukong!'");
       }
-        
+
       else if (bot2-1 == hourPosition ||bot2-1 == minPosition || bot2-1 == secPosition){
         message.channel.send("🐵: 'Been waiting for this!'" + "\n🐵: 'I will tell you that something is right below me!'" + "\n😁: 'OMG Thank you Wukong!'");
       }
@@ -205,13 +260,23 @@ bot.on("message", function(message){
       message.channel.send("🧟: 'Mundo!'" + "\n😌: 'Oh it's just Mundo..'");
     }
     else {
-      message.channel.send("😱: 'I see a dead Mundo over there...'" + "\n🧟: 'MUNDO TOO STRONG FOR YOU!'" + "\n😮: 'Dr.Mundo just revived...'");
+      message.channel.send("😱: 'I see a dead Mundo over there...'" + "\n🧟: 'MUNDO TOO STRONG FOR YOU!'" + "\n😮: 'Dr.Mundo revived...'");
       bot3 = random();
     }
   }
-  function quote4(bot4, secPosition) {
+  function quote4(bot4, hourPosition, minPosition, secPosition) {
     if (bot4>0){
-      message.channel.send("👁️: 'What do you see up there?'" + `\n🦅: 'I see something at ${secPosition}'` + "\n😍: 'Sweet! Thanks Quinn!'");
+      let highest = 0;
+      if (hourPosition > minPosition && hourPosition > secPosition){
+        highest = hourPosition;
+      }
+      if (minPosition > hourPosition && minPosition > secPosition){
+        highest = minPosition;
+      }
+      if (secPosition > minPosition && secPosition > hourPosition){
+        highest = secPosition;
+      }
+      message.channel.send("👁️: 'What do you see up there?'" + `\n🦅: 'I will tell you what's at the highest.' + '\n I see something at ${highest}'` + "\n😍: 'Sweet! Thanks Quinn!'");
     }
     else {
       message.channel.send("😱: 'I see a dead Quinn over there...'");
@@ -228,10 +293,10 @@ bot.on("message", function(message){
   //Use flashlight to check the surrounding this phase
   function check(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
     const filt = (msg) => (msg.author.id === message.author.id) && ["1","2","3","4"].includes(msg.content);
-    const opts = { maxMatches: 1, time: 30000, errors: [ 'time' ] }
+    const opts = { maxMatches: 1, time: 60000, errors: [ 'time' ] }
 
     if (flashlight > 0){
-      message.channel.send(`🤖: 'Do you wish to check your surrounding? You have ${flashlight} flashlight(s)'` + "\n1: Upper Floor" + "\n2: Current Floor" + "\n3: Lower Floor" + "\n4: No"+  "\nYou have 30 seconds");
+      message.channel.send(`🤖: 'Do you wish to check your surrounding? You have ${flashlight} flashlight(s)'` + "\n1: Upper Floor" + "\n2: Current Floor" + "\n3: Lower Floor" + "\n4: No"+  "\n`You have a minute to decide`");
     }
 
     message.channel.awaitMessages(filt, opts)
@@ -258,7 +323,7 @@ bot.on("message", function(message){
           quote3(bot3);
         }
         else if (playerPosition == bot4){
-          quote4(bot4, secPosition);
+          quote4(bot4, hourPosition, minPosition, secPosition);
         }
         else if (playerPosition == bot5){
           quote5(bot5);
@@ -338,17 +403,17 @@ bot.on("message", function(message){
   function game(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
       //Decides how many space to Move
       const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
-      const opts = { maxMatches: 1, time: 30000, errors: [ 'time' ] }
+      const opts = { maxMatches: 1, time: 60000, errors: [ 'time' ] }
 
       if (life == 2){
-        message.channel.send("🤖: 'Please select your action. 1: Move Once 2: Move Twice'" + "\nYou have 30 seconds");
+        message.channel.send("🤖: 'Please select your action. 1: Move Once 2: Move Twice'" + "\n`You have a minute to decide`");
         message.channel.awaitMessages(filt, opts)
         .then(col => {
           const m = col.first().content
           const val = m === "1" ? true : false
           if(val) {
             //Decides the direction
-            message.channel.send("🤖: 'You have moved once'" + "\n🤖: 'Please select the direction to move. 1: Move Up 2: Move Down'" + "\nYou have 30 seconds");
+            message.channel.send("🤖: 'You have moved once'" + "\n🤖: 'Please select the direction to move. 1: Move Up 2: Move Down'" + "\n`You have a minute to decide`");
             message.channel.awaitMessages(filt, opts)
             .then(col => {
               const m = col.first().content
@@ -368,7 +433,7 @@ bot.on("message", function(message){
             })
           }
           else{
-            message.channel.send("🤖: 'You have moved twice'" + "\n🤖: 'Please select the direction to move. 1: Move Up 2: Move Down'" + "\nYou have 30 seconds");
+            message.channel.send("🤖: 'You have moved twice'" + "\n🤖: 'Please select the direction to move. 1: Move Up 2: Move Down'" + "\n`You have a minute to decide`");
             message.channel.awaitMessages(filt, opts)
             .then(col => {
               const m = col.first().content
@@ -394,7 +459,7 @@ bot.on("message", function(message){
       }
       else if (life == 1){
         //Decides the direction when injured
-        message.channel.send("🤖: 'You can only move once since you are injured by a snake" + "\n🤖: 'Please select the direction to move. 1: Move Up 2: Move Down'" + "\nYou have 30 seconds");
+        message.channel.send("🤖: 'You can only move once since you are injured by a snake" + "\n🤖: 'Please select the direction to move. 1: Move Up 2: Move Down'" + "\n`You have a minute to decide`");
         message.channel.awaitMessages(filt, opts)
         .then(col => {
           const m = col.first().content
@@ -452,7 +517,7 @@ bot.on("message", function(message){
   function fate1(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
     if (playerPosition == snake1 || playerPosition == snake2 || playerPosition == flash){
       const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
-      const opts = { maxMatches: 1, time: 30000, errors: [ 'time' ] }
+      const opts = { maxMatches: 1, time: 60000, errors: [ 'time' ] }
       message.channel.send(`🤔: 'Hmmm..? I stepped on something...'` + `\n🤖: 'Do you wish to pick it up?'` + "\n1: Yes 2: No");
       message.channel.awaitMessages(filt, opts)
       .then(col => {
@@ -502,10 +567,17 @@ bot.on("message", function(message){
           message.channel.send(`🤖: -------Dead or Alive Report-------`);
           let death = 0;
 
-          if (bot1 == hourPosition || bot1 == minPosition || bot1 == secPosition ){
-            message.channel.send(`🤖: 'Alistar🐮 died at position ${bot1}'`);
-            bot1 = -1;
-            death++;
+          if (bot1 == hourPosition){
+            message.channel.send(`🤖: 'Alistar🐮 head butted an hour-hand backward...'`);
+            hourPosition--;
+          }
+          if (bot1 == minPosition){
+            message.channel.send(`🤖: 'Alistar🐮 head butted a min-hand backward...'`);
+            minPosition--;
+          }
+          if (bot1 == secPosition){
+            message.channel.send(`🤖: 'Alistar🐮 head butted a sec-hand backward...'`);
+            secPosition--;
           }
 
           if (bot2 == hourPosition || bot2 == minPosition || bot2 == secPosition ){
@@ -583,7 +655,7 @@ bot.on("message", function(message){
         }, 3000);
 
       }
-  }
+    }
     
   let prefix = config.prefix;
   let messageArray = message.content.split(" ");

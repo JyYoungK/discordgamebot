@@ -490,9 +490,9 @@ bot.on("message", function(message){
       playerPosition = 1;
     } if (playerPosition == 14) {
       playerPosition = 2;
-    } if (playerPosition == -1){
+    } if (playerPosition == 0){
       playerPosition = 12;
-    } if (playerPosition == -2){
+    } if (playerPosition == -1){
       playerPosition = 11;
     }
 

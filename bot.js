@@ -153,7 +153,7 @@ bot.on("message", function(message){
           + `\nIf your position matches with any of the clock at the end of the turn, you will die 💀.`
           + `\nBefore the clock moves, you get to choose either to move up ☝️ or down 👇, and either by once 1️⃣ or twice 2️⃣ every turn.`
           + `\nTip on how to survive 💁 : you would need to be aware of where the clock hands are, and your current position.`
-          + `\nTo help you with survival, you are given 3 flashlights 🔦.`
+          + `\nTo help you with survival, you are given 5 flashlights 🔦.`
           + `\nYou get to use flashlight to check your surroundings.`
           + `\nThe surroundings could either show a clock-hand or animals.`
           + `\nAll animals 🐖 have different abilities and tell youg different things. They are there to either help you or harm you. You find out which one is the bad one! 😉`

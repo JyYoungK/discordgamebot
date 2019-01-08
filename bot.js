@@ -708,8 +708,6 @@ bot.on("message", function(message){
     //If not dead or finished the level, move on to next level
     function closing(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
         level ++;
-        message.channel.send(`${bot1}, ${bot2}, ${bot3}, ${bot4}, ${bot5}`);
-        message.channel.send(`${Math.ceil(bot1)}, ${Math.ceil(bot2)}, ${Math.ceil(bot3)}, ${Math.ceil(bot4)}, ${Math.ceil(bot5)}`);
         if (life > 0 && difficulty == 0 && level >5){
           message.channel.send(`🤖: 'Congratulations~!!! you have finished an easy mode!'` + `\n 🤖: 'You have earned 1,000 EXP!'`);
         }

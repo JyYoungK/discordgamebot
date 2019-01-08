@@ -106,7 +106,7 @@ bot.on("message", function(message){
   if (message.author.equals(bot.user)) return;
   if (message.content == "Hello" || message.content == "hi" || message.content == "hello" || message.content == "Hi") {
     message.channel.send("Hello!!! I am also a bot! xD")};
- if (message.content.startsWith(config.prefix + "clock")) {
+  if (message.content.startsWith(config.prefix + "clock")) {
       //Starts the game + SetUp
 
         //assign clock positions
@@ -148,7 +148,7 @@ bot.on("message", function(message){
           const val1 = m === "1";
           const val2 = m === "2";
           if(val1) {
-            message.channel.send("🤖: 'Okay, let's go over some rules." + `\nYou are trapped inside a clock 🕰️` + `\n(The position goes from 1~12)` + `\nYour goal is to survive certain amount of levels (depending on the difficutly)`
+            message.channel.send("🤖: 'Okay, let's go over some rules." + `\nYou are trapped inside a clock 🕰️` + `\n(The position goes from 1~12)` + `\nYour goal is to survive certain amount of levels (depending on the difficulty)`
             + `\nThere are 3️⃣ main things to avoid. An hour-hand clock moves up once, a minute-hand moves up twice, a second-hand moves up three times every turn.`
             + `\nIf your position matches with any of the clock at the end of the turn, you will die 💀.`
             + `\nBefore the clock moves, you get to choose either to move up ☝️ or down 👇, and either by once 1️⃣ or twice 2️⃣ every turn.`
@@ -293,166 +293,173 @@ bot.on("message", function(message){
         message.channel.send("😱: 'I see a dead Twitch over there...'");
       }
     }
+
+
     //Use flashlight to check the surrounding this phase
     function check(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
       const filt = (msg) => (msg.author.id === message.author.id) && ["1","2","3","4"].includes(msg.content);
       const opts = { maxMatches: 1, time: 60000, errors: [ 'time' ] }
 
-      if (flashlight > 0){
-        message.channel.send(`🤖: 'Do you wish to check your surrounding? You have ${flashlight} flashlight(s)'` + "\n1: Upper Floor" + "\n2: Current Floor" + "\n3: Lower Floor" + "\n4: No"+  "\n`You have a minute to decide`");
-      }
+      if (difficulty > 0){
+        if (flashlight > 0){
+          message.channel.send(`🤖: 'Do you wish to check your surrounding? You have ${flashlight} flashlight(s)'` + "\n1: Upper Floor" + "\n2: Current Floor" + "\n3: Lower Floor" + "\n4: No"+  "\n`You have a minute to decide`");
+        }
 
-      message.channel.awaitMessages(filt, opts)
-      .then(col => {
-        const m = col.first().content
-        const val1 = m === "1";
-        const val2 = m === "2";
-        const val3 = m === "3";
-        const val4 = m === "4";
-        //const val = m === "1" ? true : false
-        if(val1) {
-          flashlight--;
-          message.channel.send("🤖: 'You checked above...'");
-          if (playerPosition+1 != 13){
-            if (playerPosition+1 == hourPosition || playerPosition+1 == minPosition || playerPosition+1 == secPosition){
-              message.channel.send("😬: 'I see a clock-hand right up there... But can't tell which hand it is...'");
+        message.channel.awaitMessages(filt, opts)
+        .then(col => {
+          const m = col.first().content
+          const val1 = m === "1";
+          const val2 = m === "2";
+          const val3 = m === "3";
+          const val4 = m === "4";
+          //const val = m === "1" ? true : false
+          if(val1) {
+            flashlight--;
+            message.channel.send("🤖: 'You checked above...'");
+            if (playerPosition+1 != 13){
+              if (playerPosition+1 == hourPosition || playerPosition+1 == minPosition || playerPosition+1 == secPosition){
+                message.channel.send("😬: 'I see a clock-hand right up there... But can't tell which hand it is...'");
+              }
+              if (playerPosition+1 == Math.ceil(bot1)){
+                quote1(bot1);
+              }
+              if (playerPosition+1 == Math.ceil(bot2)){
+                quote2(bot2, hourPosition, minPosition, secPosition);
+              }
+              if (playerPosition+1 == Math.ceil(bot3)){
+                quote3(bot3);
+              }
+              if (playerPosition+1 == Math.ceil(bot4)){
+                quote4(bot4, hourPosition, minPosition, secPosition);
+              }
+              if (playerPosition+1 == Math.ceil(bot5)){
+                quote5(bot5, life);
+              }
+              else {
+                message.channel.send("😯: 'There isn't anything there...'");
+              }
             }
-            if (playerPosition+1 == Math.ceil(bot1)){
-              quote1(bot1);
-            }
-            if (playerPosition+1 == Math.ceil(bot2)){
-              quote2(bot2, hourPosition, minPosition, secPosition);
-            }
-            if (playerPosition+1 == Math.ceil(bot3)){
-              quote3(bot3);
-            }
-            if (playerPosition+1 == Math.ceil(bot4)){
-              quote4(bot4, hourPosition, minPosition, secPosition);
-            }
-            if (playerPosition+1 == Math.ceil(bot5)){
-              quote5(bot5, life);
+            else if (playerPosition+1 == 13){
+              if (1 == hourPosition || 1 == minPosition || 1 == secPosition){
+                message.channel.send("😬: 'I see a clock-hand right up there... But can't tell which hand it is...'");
+              }
+              if (1 == Math.ceil(bot1)){
+                quote1(bot1);
+              }
+              if (1 == Math.ceil(bot2)){
+                quote2(bot2, hourPosition, minPosition, secPosition);
+              }
+              if (1 == Math.ceil(bot3)){
+                quote3(bot3);
+              }
+              if (1 == Math.ceil(bot4)){
+                quote4(bot4, hourPosition, minPosition, secPosition);
+              }
+              if (1 == Math.ceil(bot5, life)){
+                quote5(bot5, life);
+              }
+              else {
+                message.channel.send("😯: 'There isn't anything there...'");
+              }
             }
             else {
               message.channel.send("😯: 'There isn't anything there...'");
             }
           }
-          else if (playerPosition+1 == 13){
-            if (1 == hourPosition || 1 == minPosition || 1 == secPosition){
-              message.channel.send("😬: 'I see a clock-hand right up there... But can't tell which hand it is...'");
+          else if(val2) {
+            flashlight--;
+            message.channel.send("🤖: 'You checked around...'");
+            if (playerPosition == hourPosition || playerPosition == minPosition || playerPosition == secPosition){
+              message.channel.send("😬: 'I see a clock-hand right here... But can't tell which hand it is...'");
             }
-            if (1 == Math.ceil(bot1)){
+            if (playerPosition == Math.ceil(bot1)){
               quote1(bot1);
             }
-            if (1 == Math.ceil(bot2)){
+            if (playerPosition == Math.ceil(bot2)){
               quote2(bot2, hourPosition, minPosition, secPosition);
             }
-            if (1 == Math.ceil(bot3)){
+            if (playerPosition == Math.ceil(bot3)){
               quote3(bot3);
             }
-            if (1 == Math.ceil(bot4)){
-              quote4(bot4, hourPosition, minPosition, secPosition);
-            }
-            if (1 == Math.ceil(bot5, life)){
-              quote5(bot5, life);
-            }
-            else {
-              message.channel.send("😯: 'There isn't anything there...'");
-            }
-          }
-          else {
-            message.channel.send("😯: 'There isn't anything there...'");
-          }
-        }
-        else if(val2) {
-          flashlight--;
-          message.channel.send("🤖: 'You checked around...'");
-          if (playerPosition == hourPosition || playerPosition == minPosition || playerPosition == secPosition){
-            message.channel.send("😬: 'I see a clock-hand right here... But can't tell which hand it is...'");
-          }
-          if (playerPosition == Math.ceil(bot1)){
-            quote1(bot1);
-          }
-          if (playerPosition == Math.ceil(bot2)){
-            quote2(bot2, hourPosition, minPosition, secPosition);
-          }
-          if (playerPosition == Math.ceil(bot3)){
-            quote3(bot3);
-          }
-          if (playerPosition == Math.ceil(bot4)){
-            quote4(bot4, secPosition);
-          }
-          if (playerPosition == Math.ceil(bot5)){
-            quote5(bot5, life);
-          }
-          else {
-            message.channel.send("😯: 'There isn't anything there...'");
-          }
-        }
-        else if(val3) {
-          flashlight--;
-          message.channel.send("🤖: 'You checked below...'");
-          if (playerPosition-1 != 0){
-            if (playerPosition-1 == hourPosition || playerPosition-1 == minPosition || playerPosition-1 == secPosition){
-              message.channel.send("😬: 'I see a clock-hand right down there... But can't tell which hand it is...'");
-            }
-            if (playerPosition-1 == Math.ceil(bot1)){
-              quote1(bot1);
-            }
-            if (playerPosition-1 == Math.ceil(bot2)){
-              quote2(bot2, hourPosition, minPosition, secPosition);
-            }
-            if (playerPosition-1 == Math.ceil(bot3)){
-              quote3(bot3);
-            }
-            if (playerPosition-1 == Math.ceil(bot4)){
+            if (playerPosition == Math.ceil(bot4)){
               quote4(bot4, secPosition);
             }
-            if (playerPosition-1 == Math.ceil(bot5)){
+            if (playerPosition == Math.ceil(bot5)){
               quote5(bot5, life);
             }
             else {
               message.channel.send("😯: 'There isn't anything there...'");
             }
           }
-          else if (playerPosition-1 == 0){
-            if (12 == hourPosition || 12 == minPosition || 12 == secPosition){
-              message.channel.send("😬: 'I see a clock-hand right down there... But can't tell which hand it is...'");
+          else if(val3) {
+            flashlight--;
+            message.channel.send("🤖: 'You checked below...'");
+            if (playerPosition-1 != 0){
+              if (playerPosition-1 == hourPosition || playerPosition-1 == minPosition || playerPosition-1 == secPosition){
+                message.channel.send("😬: 'I see a clock-hand right down there... But can't tell which hand it is...'");
+              }
+              if (playerPosition-1 == Math.ceil(bot1)){
+                quote1(bot1);
+              }
+              if (playerPosition-1 == Math.ceil(bot2)){
+                quote2(bot2, hourPosition, minPosition, secPosition);
+              }
+              if (playerPosition-1 == Math.ceil(bot3)){
+                quote3(bot3);
+              }
+              if (playerPosition-1 == Math.ceil(bot4)){
+                quote4(bot4, secPosition);
+              }
+              if (playerPosition-1 == Math.ceil(bot5)){
+                quote5(bot5, life);
+              }
+              else {
+                message.channel.send("😯: 'There isn't anything there...'");
+              }
             }
-            if (12 == Math.ceil(bot1)){
-              quote1(bot1);
-            }
-            if (12 == Math.ceil(bot2)){
-              quote2(bot2, hourPosition, minPosition, secPosition);
-            }
-            if (12 == Math.ceil(bot3)){
-              quote3(bot3);
-            }
-            if (12 == Math.ceil(bot4)){
-              quote4(bot4, secPosition);
-            }
-            if (12 == Math.ceil(bot5)){
-              quote5(bot5, life);
+            else if (playerPosition-1 == 0){
+              if (12 == hourPosition || 12 == minPosition || 12 == secPosition){
+                message.channel.send("😬: 'I see a clock-hand right down there... But can't tell which hand it is...'");
+              }
+              if (12 == Math.ceil(bot1)){
+                quote1(bot1);
+              }
+              if (12 == Math.ceil(bot2)){
+                quote2(bot2, hourPosition, minPosition, secPosition);
+              }
+              if (12 == Math.ceil(bot3)){
+                quote3(bot3);
+              }
+              if (12 == Math.ceil(bot4)){
+                quote4(bot4, secPosition);
+              }
+              if (12 == Math.ceil(bot5)){
+                quote5(bot5, life);
+              }
+              else {
+                message.channel.send("😯: 'There isn't anything there...'");
+              }
             }
             else {
               message.channel.send("😯: 'There isn't anything there...'");
             }
           }
-          else {
-            message.channel.send("😯: 'There isn't anything there...'");
+          else if(val4){
+            message.channel.send("😅: 'I guess I will save it for later...'");
           }
-        }
-        else if(val4){
-          message.channel.send("😅: 'I guess I will save it for later...'");
-        }
-        else{
-          message.channel.send("🙄: 'That is a wrong choice, please select again...'");
-          check(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
-        }
+          else{
+            message.channel.send("🙄: 'That is a wrong choice, please select again...'");
+            check(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
+          }
+          game(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
+        })
+        .catch(err => {
+          message.channel.send("🤖: 'You took too long! The game has ended 😥'");
+        })
+      }
+      else {
         game(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
-      })
-      .catch(err => {
-        message.channel.send("🤖: 'You took too long! The game has ended 😥'");
-      })
+      }
     }
 
     //Decides to move up/down to avoid clock hands
@@ -571,49 +578,53 @@ bot.on("message", function(message){
 
     //Chekcs if you picked up any items
     function fate1(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition){
-      if (playerPosition == snake1 || playerPosition == snake2 || playerPosition == flash){
-        const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
-        const opts = { maxMatches: 1, time: 60000, errors: [ 'time' ] }
-        message.channel.send(`🤔: 'Hmmm..? I stepped on something...'` + `\n🤖: 'Do you wish to pick it up?'` + "\n1: Yes 2: No");
-        message.channel.awaitMessages(filt, opts)
-        .then(col => {
-          const m = col.first().content
-          const val1 = m === "1";
-          const val2 = m === "2";
-          //const val = m === "1" ? true : false
-          if(val1) {
-            message.channel.send("🤖: 'You decided to pick it up'");
-            if (playerPosition == flash) {
-              message.channel.send(`😍: Nice!!!` + `\n You picked up a flashlight!🔦` + `\n'You now have an additional flashlight'`);
-              flashlight ++;
-              flash = -1;
+      if (difficulty > 0){
+        if (playerPosition == snake1 || playerPosition == snake2 || playerPosition == flash){
+          const filt = (msg) => (msg.author.id === message.author.id) && ["1","2"].includes(msg.content);
+          const opts = { maxMatches: 1, time: 60000, errors: [ 'time' ] }
+          message.channel.send(`🤔: 'Hmmm..? I stepped on something...'` + `\n🤖: 'Do you wish to pick it up?'` + "\n1: Yes 2: No");
+          message.channel.awaitMessages(filt, opts)
+          .then(col => {
+            const m = col.first().content
+            const val1 = m === "1";
+            const val2 = m === "2";
+            //const val = m === "1" ? true : false
+            if(val1) {
+              message.channel.send("🤖: 'You decided to pick it up'");
+              if (playerPosition == flash) {
+                message.channel.send(`😍: Nice!!!` + `\n You picked up a flashlight!🔦` + `\n'You now have an additional flashlight'`);
+                flashlight ++;
+                flash = -1;
+                Fate2(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
+              }
+              else if ((playerPosition == snake1 && life == 2) || (playerPosition == snake2 && life == 2)){
+                message.channel.send(`😭: Ouch!!!` + `\n You accidentally picked up a snake and got bit!🐍` + `\n'If you get bit again, you will die'`);
+                life --;
+                Fate2(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
+              }
+              else if ((playerPosition == snake1 && life == 1) || (playerPosition == snake2 && life == 1)){
+                message.channel.send(`You got poisoned again!🐍` + `\n'Sorry you died from poisoning💀💀💀'`);
+                life = 0;
+                closing(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
+              }
+            }
+            else {
+              message.channel.send("🤖: 'You decided not to pick it up'");
               Fate2(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
             }
-            else if ((playerPosition == snake1 && life == 2) || (playerPosition == snake2 && life == 2)){
-              message.channel.send(`😭: Ouch!!!` + `\n You accidentally picked up a snake and got bit!🐍` + `\n'If you get bit again, you will die'`);
-              life --;
-              Fate2(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
-            }
-            else if ((playerPosition == snake1 && life == 1) || (playerPosition == snake2 && life == 1)){
-              message.channel.send(`You got poisoned again!🐍` + `\n'Sorry you died from poisoning💀💀💀'`);
-              life = 0;
-              closing(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
-            }
-          }
-          else {
-            message.channel.send("🤖: 'You decided not to pick it up'");
-            Fate2(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
-          }
 
-        })
-        .catch(err => {
-          message.channel.send("🤖: 'You took too long! The game has ended 😥'");
-        })
+          })
+          .catch(err => {
+            message.channel.send("🤖: 'You took too long! The game has ended 😥'");
+          })
+        }
+        else {
+          Fate2(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
+        }
       }
       else {
         Fate2(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition)
       }
-
     }
 
     //Checks for death
@@ -723,7 +734,7 @@ bot.on("message", function(message){
           }, 3000);
 
         }
-  }
+      }
     
   let prefix = config.prefix;
   let messageArray = message.content.split(" ");

@@ -634,47 +634,49 @@ bot.on("message", function(message){
             message.channel.send(`🤖: -------Dead or Alive Report-------`);
             let death = 0;
 
-            if (bot1 == hourPosition){
-              message.channel.send(`🤖: 'Alistar🐮 head butted an hour-hand backward and died at position ${bot1}'`);
-              hourPosition--;
-              bot1 = bot1 - 0.5;
-              death++;
-            }
-            if (bot1 == minPosition){
-              message.channel.send(`🤖: 'Alistar🐮 head butted a min-hand backward and died at position ${bot1}'`);
-              minPosition--;
-              bot1 = bot1 - 0.5;
-              death++;
-            }
-            if (bot1 == secPosition){
-              message.channel.send(`🤖: 'Alistar🐮 head butted a sec-hand backward and died at position ${bot1}'`);
-              secPosition--;
-              bot1 = bot1 - 0.5;
-              death++;
-            }
+            if (difficulty > 0){
+              if (bot1 == hourPosition){
+                message.channel.send(`🤖: 'Alistar🐮 head butted an hour-hand backward and died at position ${bot1}'`);
+                hourPosition--;
+                bot1 = bot1 - 0.5;
+                death++;
+              }
+              if (bot1 == minPosition){
+                message.channel.send(`🤖: 'Alistar🐮 head butted a min-hand backward and died at position ${bot1}'`);
+                minPosition--;
+                bot1 = bot1 - 0.5;
+                death++;
+              }
+              if (bot1 == secPosition){
+                message.channel.send(`🤖: 'Alistar🐮 head butted a sec-hand backward and died at position ${bot1}'`);
+                secPosition--;
+                bot1 = bot1 - 0.5;
+                death++;
+              }
 
-            if (bot2 == hourPosition || bot2 == minPosition || bot2 == secPosition ){
-              message.channel.send(`🤖: 'Wukong🐵 died at position ${bot2}'`);
-              bot2 = bot2 - 0.5;
-              death++;
-            }
+              if (bot2 == hourPosition || bot2 == minPosition || bot2 == secPosition ){
+                message.channel.send(`🤖: 'Wukong🐵 died at position ${bot2}'`);
+                bot2 = bot2 - 0.5;
+                death++;
+              }
 
-            if (bot3 == hourPosition || bot3 == minPosition || bot3 == secPosition ){
-              message.channel.send(`🤖: 'Mundo🧟 died at position ${bot3}'`);
-              bot3 = bot3 - 0.5;
-              death++;
-            }
+              if (bot3 == hourPosition || bot3 == minPosition || bot3 == secPosition ){
+                message.channel.send(`🤖: 'Mundo🧟 died at position ${bot3}'`);
+                bot3 = bot3 - 0.5;
+                death++;
+              }
 
-            if (bot4 == hourPosition || bot4 == minPosition || bot4 == secPosition ){
-              message.channel.send(`🤖: 'Quinn🦅 died at position ${bot4}'`);
-              bot4 = bot4 - 0.5;
-              death++;
-            }
+              if (bot4 == hourPosition || bot4 == minPosition || bot4 == secPosition ){
+                message.channel.send(`🤖: 'Quinn🦅 died at position ${bot4}'`);
+                bot4 = bot4 - 0.5;
+                death++;
+              }
 
-            if (bot5 == hourPosition || bot5 == minPosition || bot5 == secPosition ){
-              message.channel.send(`🤖: 'Twitch🐀 died at position ${bot5}'`);
-              bot5 = bot5 - 0.5;
-              death++;
+              if (bot5 == hourPosition || bot5 == minPosition || bot5 == secPosition ){
+                message.channel.send(`🤖: 'Twitch🐀 died at position ${bot5}'`);
+                bot5 = bot5 - 0.5;
+                death++;
+              }
             }
 
             if (playerPosition == hourPosition){
@@ -700,7 +702,6 @@ bot.on("message", function(message){
             message.channel.send(`🤖: ---------End of the Report---------`);
             closing(snake1, snake2, flashlight, flash, difficulty, bot1, bot2, bot3, bot4, bot5, life, level, playerPosition, hourPosition, minPosition, secPosition);
           }, 2000);
-      //message.channel.send(`🤖: -------Dead or Alive Report-------`);
     }
 
 

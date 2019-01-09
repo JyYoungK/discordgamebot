@@ -363,7 +363,7 @@ bot.on("message", function(message){
               }
             }
             else {
-              message.channel.send("😯: 'There isn't anything there...'");
+              message.channel.send("😌: 'I don't see any clock-hands there...'");
             }
           }
           else if(val2) {
@@ -414,7 +414,7 @@ bot.on("message", function(message){
                 quote5(bot5, life);
               }
               else {
-                message.channel.send("😯: 'There isn't anything there...'");
+                message.channel.send("😌: 'I don't see any clock-hands there...'");
               }
             }
             else if (playerPosition-1 == 0){
@@ -441,7 +441,7 @@ bot.on("message", function(message){
               }
             }
             else {
-              message.channel.send("😯: 'There isn't anything there...'");
+              message.channel.send("😌: 'I don't see any clock-hands there...'");
             }
           }
           else if(val4){

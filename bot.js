@@ -205,7 +205,7 @@ bot.on("message", function(message){
           difficulty = 1;
           if (playerPosition == hourPosition || playerPosition == minPosition || secPosition == hourPosition || playerPosition-1 == hourPosition || playerPosition-1 == minPosition || playerPosition-1 == secPosition || playerPosition+1 == hourPosition || playerPosition+1 == minPosition || playerPosition+1 == secPosition){
             message.channel.send(`🤖: ⚠️!!! WARNING!!!⚠️` + `\n'Watch out! There is something near you'`);
-            message.channel.send(`😣: I can hear the clock... but I can't tell if it's coming from above, below, or here because of echo...'`);
+            message.channel.send(`😣: I can hear the clock... but I can't tell if it's coming from above, below, or here because of the echo...'`);
           }
           else{
             message.channel.send(`🤖: 'It seems like there isn't anything near you yet'`);
@@ -249,7 +249,7 @@ bot.on("message", function(message){
         }
 
         else {
-          message.channel.send("🐵: 'Hey there! I will tell you that nothing has passed me recently'" + "\n😁: 'OMG Thank you Wukong!'");
+          message.channel.send("🐵: 'Hey there! I will tell you that nothing is near me'" + "\n😁: 'OMG Thank you Wukong!'");
         }
       }
       else {
@@ -317,53 +317,57 @@ bot.on("message", function(message){
             flashlight--;
             message.channel.send("🤖: 'You checked above...'");
             if (playerPosition+1 != 13){
-              if (playerPosition+1 == hourPosition || playerPosition+1 == minPosition || playerPosition+1 == secPosition){
-                message.channel.send("😬: 'I see a clock-hand right up there... But can't tell which hand it is...'");
-              }
-              if (playerPosition+1 == Math.ceil(bot1)){
-                quote1(bot1);
-              }
-              if (playerPosition+1 == Math.ceil(bot2)){
-                quote2(bot2, hourPosition, minPosition, secPosition);
-              }
-              if (playerPosition+1 == Math.ceil(bot3)){
-                quote3(bot3);
-              }
-              if (playerPosition+1 == Math.ceil(bot4)){
-                quote4(bot4, hourPosition, minPosition, secPosition);
-              }
-              if (playerPosition+1 == Math.ceil(bot5)){
-                quote5(bot5, life);
+              if (playerPosition+1 == hourPosition || playerPosition+1 == minPosition || playerPosition+1 == secPosition || playerPosition+1 == Math.ceil(bot1) || playerPosition+1 == Math.ceil(bot2) || playerPosition+1 == Math.ceil(bot3) || playerPosition+1 == Math.ceil(bot4) || playerPosition+1 == Math.ceil(bot5)){
+                if (playerPosition+1 == hourPosition || playerPosition+1 == minPosition || playerPosition+1 == secPosition){
+                  message.channel.send("😬: 'I see a clock-hand right up there... But can't tell which hand it is...'");
+                }
+                if (playerPosition+1 == Math.ceil(bot1)){
+                  quote1(bot1);
+                }
+                if (playerPosition+1 == Math.ceil(bot2)){
+                  quote2(bot2, hourPosition, minPosition, secPosition);
+                }
+                if (playerPosition+1 == Math.ceil(bot3)){
+                  quote3(bot3);
+                }
+                if (playerPosition+1 == Math.ceil(bot4)){
+                  quote4(bot4, hourPosition, minPosition, secPosition);
+                }
+                if (playerPosition+1 == Math.ceil(bot5)){
+                  quote5(bot5, life);
+                }
               }
               else {
-                message.channel.send("😯: 'There isn't anything there...'");
+                message.channel.send("😓: 'I don't see anything there...'");
               }
             }
             else if (playerPosition+1 == 13){
-              if (1 == hourPosition || 1 == minPosition || 1 == secPosition){
-                message.channel.send("😬: 'I see a clock-hand right up there... But can't tell which hand it is...'");
-              }
-              if (1 == Math.ceil(bot1)){
-                quote1(bot1);
-              }
-              if (1 == Math.ceil(bot2)){
-                quote2(bot2, hourPosition, minPosition, secPosition);
-              }
-              if (1 == Math.ceil(bot3)){
-                quote3(bot3);
-              }
-              if (1 == Math.ceil(bot4)){
-                quote4(bot4, hourPosition, minPosition, secPosition);
-              }
-              if (1 == Math.ceil(bot5, life)){
-                quote5(bot5, life);
+              if (1 == hourPosition || 1 == minPosition || 1 == secPosition || 1 == Math.ceil(bot1) || 1 == Math.ceil(bot2) || 1 == Math.ceil(bot3) || 1 == Math.ceil(bot4) || 1 == Math.ceil(bot5)){
+                if (1 == hourPosition || 1 == minPosition || 1 == secPosition){
+                  message.channel.send("😬: 'I see a clock-hand right up there... But can't tell which hand it is...'");
+                }
+                if (1 == Math.ceil(bot1)){
+                  quote1(bot1);
+                }
+                if (1 == Math.ceil(bot2)){
+                  quote2(bot2, hourPosition, minPosition, secPosition);
+                }
+                if (1 == Math.ceil(bot3)){
+                  quote3(bot3);
+                }
+                if (1 == Math.ceil(bot4)){
+                  quote4(bot4, hourPosition, minPosition, secPosition);
+                }
+                if (1 == Math.ceil(bot5, life)){
+                  quote5(bot5, life);
+                }
               }
               else {
-                message.channel.send("😯: 'There isn't anything there...'");
+                message.channel.send("😓: 'I don't see anything there...'");
               }
             }
             else {
-              message.channel.send("😌: 'I don't see any clock-hands there...'");
+              message.channel.send("😓: 'I don't see anything there...'");
             }
           }
           else if(val2) {
@@ -388,60 +392,64 @@ bot.on("message", function(message){
               quote5(bot5, life);
             }
             else {
-              message.channel.send("😯: 'There isn't anything there...'");
+              message.channel.send("😓: 'I don't see anything here...'");
             }
           }
           else if(val3) {
             flashlight--;
             message.channel.send("🤖: 'You checked below...'");
             if (playerPosition-1 != 0){
-              if (playerPosition-1 == hourPosition || playerPosition-1 == minPosition || playerPosition-1 == secPosition){
-                message.channel.send("😬: 'I see a clock-hand right down there... But can't tell which hand it is...'");
-              }
-              if (playerPosition-1 == Math.ceil(bot1)){
-                quote1(bot1);
-              }
-              if (playerPosition-1 == Math.ceil(bot2)){
-                quote2(bot2, hourPosition, minPosition, secPosition);
-              }
-              if (playerPosition-1 == Math.ceil(bot3)){
-                quote3(bot3);
-              }
-              if (playerPosition-1 == Math.ceil(bot4)){
-                quote4(bot4, secPosition);
-              }
-              if (playerPosition-1 == Math.ceil(bot5)){
-                quote5(bot5, life);
+              if (playerPosition-1 == hourPosition || playerPosition-1 == minPosition || playerPosition-1 == secPosition || playerPosition-1 == Math.ceil(bot1) || playerPosition-1 == Math.ceil(bot2) || playerPosition-1 == Math.ceil(bot3) || playerPosition-1 == Math.ceil(bot4) || playerPosition-1 == Math.ceil(bot5)){
+                if (playerPosition-1 == hourPosition || playerPosition-1 == minPosition || playerPosition-1 == secPosition){
+                  message.channel.send("😬: 'I see a clock-hand right down there... But can't tell which hand it is...'");
+                }
+                if (playerPosition-1 == Math.ceil(bot1)){
+                  quote1(bot1);
+                }
+                if (playerPosition-1 == Math.ceil(bot2)){
+                  quote2(bot2, hourPosition, minPosition, secPosition);
+                }
+                if (playerPosition-1 == Math.ceil(bot3)){
+                  quote3(bot3);
+                }
+                if (playerPosition-1 == Math.ceil(bot4)){
+                  quote4(bot4, secPosition);
+                }
+                if (playerPosition-1 == Math.ceil(bot5)){
+                  quote5(bot5, life);
+                }
               }
               else {
-                message.channel.send("😌: 'I don't see any clock-hands there...'");
+                message.channel.send("😓: 'I don't see anything there...'");
               }
             }
             else if (playerPosition-1 == 0){
-              if (12 == hourPosition || 12 == minPosition || 12 == secPosition){
-                message.channel.send("😬: 'I see a clock-hand right down there... But can't tell which hand it is...'");
-              }
-              if (12 == Math.ceil(bot1)){
-                quote1(bot1);
-              }
-              if (12 == Math.ceil(bot2)){
-                quote2(bot2, hourPosition, minPosition, secPosition);
-              }
-              if (12 == Math.ceil(bot3)){
-                quote3(bot3);
-              }
-              if (12 == Math.ceil(bot4)){
-                quote4(bot4, secPosition);
-              }
-              if (12 == Math.ceil(bot5)){
-                quote5(bot5, life);
+              if (12 == hourPosition || 12 == minPosition || 12 == secPosition || 12 == Math.ceil(bot1) || 12 == Math.ceil(bot2) || 12 == Math.ceil(bot3) || 12 == Math.ceil(bot4) || 12 == Math.ceil(bot5)){
+                if (12 == hourPosition || 12 == minPosition || 12 == secPosition){
+                  message.channel.send("😬: 'I see a clock-hand right down there... But can't tell which hand it is...'");
+                }
+                if (12 == Math.ceil(bot1)){
+                  quote1(bot1);
+                }
+                if (12 == Math.ceil(bot2)){
+                  quote2(bot2, hourPosition, minPosition, secPosition);
+                }
+                if (12 == Math.ceil(bot3)){
+                  quote3(bot3);
+                }
+                if (12 == Math.ceil(bot4)){
+                  quote4(bot4, secPosition);
+                }
+                if (12 == Math.ceil(bot5)){
+                  quote5(bot5, life);
+                }
               }
               else {
-                message.channel.send("😯: 'There isn't anything there...'");
+                message.channel.send("😓: 'I don't see anything there...'");
               }
             }
             else {
-              message.channel.send("😌: 'I don't see any clock-hands there...'");
+              message.channel.send("😓: 'I don't see anything there...'");
             }
           }
           else if(val4){

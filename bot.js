@@ -34,7 +34,7 @@ bot.on('message', message => {
                     if(arr.indexOf(num) === -1) arr.push(num);
                 }
                 guesses = 0;
-                message.channel.send(arr);
+                message.channel.send("Okay, I thought of a number. Start guessing my 5 digit number! ex) `!guess 13579`");
             }
 
             else{

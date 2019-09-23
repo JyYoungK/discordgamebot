@@ -6,6 +6,10 @@ const config = require("./config.json");
 //sql unavailable atm since it's not working
     //const = require("sqlite");
 //.open("./score.sqlite");
+var guesses;
+var num = 0;
+var arr = [];
+var correct = 0;
 var opt = ['spock', 'scissors', 'rock', 'paper', 'lizard'];
 var moji = ['Spock, \:vulcan:', 'Scissors, \:scissors:', 'Rock, \:full_moon_with_face:', 'Paper, \:newspaper:', 'Lizard, \:lizard:'];
 var uss = new Array(opt.length);
@@ -18,6 +22,47 @@ bot.on('message', message => {
     	message.channel.send('PONG!');
   	}
     if (message.channel.type === "dm") return;
+    var mes = message.content.split(" ");
+
+    if(mes[0] == '!guess') {
+
+            //Starting a new game
+            if (num == 0){
+                message.reply('Picking a random number 5 unique numbers');
+                while(arr.length < 5){
+                    num = Math.floor(Math.random()*9) + 1;
+                    if(arr.indexOf(num) === -1) arr.push(num);
+                }
+                guesses = 0;
+                message.channel.send(arr);
+            }
+
+            else{
+              for (var i = 0; i<5; i++){
+                  if((mes[1][i]) == arr[i]){
+                    correct++;
+                  }
+                }
+                guesses++;
+
+                if(correct == 5){
+                    message.reply('Hurray! You did it! You took ' + guesses + ' tries.');
+                    correct = 0;
+                    guesses = 0;
+                    num = 0;
+                    arr = [];
+                }
+                else if (correct == 0){
+                  message.channel.send("Wow! That is a joker! You got none right!");
+                  correct = 0;
+                }
+                else {
+                  if (correct > 1) message.channel.send("You got " + correct + " correct guesses!");
+                  if (correct == 1) message.channel.send("You got " + correct + " correct guess!");
+                  correct = 0;
+                }
+            }
+        }
     function rps() {
       for (var i = 0; i < opt.length; i++) {
         if (message.content === uss[i]) {

@@ -43,7 +43,6 @@ bot.on('message', message => {
       message.channel.send(
         "# Perfect guess means, there are # numbers that exists in my number and are in a correct order."
       );
-      message.channel.send(arr);
     } else {
       for (var i = 0; i < 5; i++) {
         for (var j = i + 1; j < 5; j++) {

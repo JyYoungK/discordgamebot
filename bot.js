@@ -141,7 +141,7 @@ bot.on('message', message => {
 
 bot.on("ready", async () => {
   console.log(`${bot.user.username} is online on ${bot.guilds.size} servers!`);
-  bot.user.setActivity("games all day everyday", {type: "PLAYING"});
+  bot.user.setActivity("gamebot: info", {type: "PLAYING"});
 
 });
 
@@ -813,7 +813,9 @@ bot.on("message", function(message){
                 message.channel.send("Here are useful functions you can ask me");
                 var embed = new Discord.RichEmbed()
                   .addField("gamebot: info", "Shows all the games I can play!", true)
-                  .addField("!rps: `enter either rock, paper or scissors`", "I will play rock-paper-scissor game with you!", true)
+                  .addField("!`enter either rock, paper, scissors, lizard, spock`", "I will play 5way rock-paper-scissor game with you!", true)
+                  .addField("!guess", "This is 5 unique guessing game against me. I will tell you # guesses that are right in terms of number and order", true)
+                  .addField("!clock", "This is a survival strategy game. More rules are included inside the game", true)
                   .setColor(0xff00dc)
                   .setFooter("Was this message helpful?")
                   .setThumbnail(message.author.avatarURL)

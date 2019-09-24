@@ -1,6 +1,6 @@
 # discordgamebot
 
-Join my discord channel to try out my following games
+Invite my GameBot to try out my following games: https://discordapp.com/api/oauth2/authorize?client_id=475850990118109206&permissions=0&scope=bot
 
 Type either !rock, !scissors, !paper, !spock, !lizard to play 5-way rock-paper-scissors-lizard-spock!
 

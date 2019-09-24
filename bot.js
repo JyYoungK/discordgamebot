@@ -26,21 +26,25 @@ bot.on('message', message => {
     if (message.channel.type === "dm") return;
     var mes = message.content.split(" ");
 
-    if(mes[0] == '!guess') {
-
-            //Starting a new game
-            if (num == 0){
-                message.reply("Okay, I thought of a number. Start guessing my 5 unique numbers! ex) `!guess 13579`");
-                while(arr.length < 5){
-                    num = Math.floor(Math.random()*9) + 1;
-                    if(arr.indexOf(num) === -1) arr.push(num);
-                }
-                guesses = 0;
-                message.channel.send("# Correct means, there are # numbers that exists in my number but not in a correct order.");
-                message.channel.send("# Perfect means, there are # numbers that exists in my number and are in a correct order.");
-            }
-
-            else {
+    if (mes[0] == "!guess") {
+    //Starting a new game
+    if (num == 0) {
+      message.reply(
+        "Okay, I thought of a number. Start guessing my 5 unique numbers! ex) `!guess 13579`"
+      );
+      while (arr.length < 5) {
+        num = Math.floor(Math.random() * 10);
+        if (arr.indexOf(num) === -1) arr.push(num);
+      }
+      guesses = 0;
+      message.channel.send(
+        "# Correct guess means, there are # numbers that exists in my number but not in a correct order."
+      );
+      message.channel.send(
+        "# Perfect guess means, there are # numbers that exists in my number and are in a correct order."
+      );
+      message.channel.send(arr);
+    } else {
       for (var i = 0; i < 5; i++) {
         for (var j = i + 1; j < 5; j++) {
           if (mes[1][i] == mes[1][j]) {
@@ -82,13 +86,41 @@ bot.on('message', message => {
           correct = 0;
           perfect = 0;
         } else {
-          message.channel.send(
-            "You got " +
-              correct +
-              " correct guesses and " +
-              perfect +
-              " perfect guesses"
-          );
+          if (correct > 1 && perfect > 1)
+            message.channel.send(
+              "You got " +
+                correct +
+                " correct guesses and " +
+                perfect +
+                " perfect guesses"
+            );
+
+          if (correct > 1 && perfect <= 1)
+            message.channel.send(
+              "You got " +
+                correct +
+                " correct guesses and " +
+                perfect +
+                " perfect guess"
+            );
+
+          if (perfect > 1 && correct <= 1)
+            message.channel.send(
+              "You got " +
+                correct +
+                " correct guess and " +
+                perfect +
+                " perfect guesses"
+            );
+
+          if (correct <= 1 && perfect <= 1)
+            message.channel.send(
+              "You got " +
+                correct +
+                " correct guess and " +
+                perfect +
+                " perfect guess"
+            );
 
           correct = 0;
           perfect = 0;
@@ -96,7 +128,6 @@ bot.on('message', message => {
       }
     }
   }
-        }
     function rps() {
       for (var i = 0; i < opt.length; i++) {
         if (message.content === uss[i]) {

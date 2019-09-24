@@ -877,7 +877,7 @@ bot.on("message", function(message){
                 message.channel.send("Here are useful functions you can ask me");
                 var embed = new Discord.RichEmbed()
                   .addField("gamebot: info", "Shows all the games I can play!", true)
-                  .addField("!`enter either rock, paper, scissors, lizard, spock`", "I will play 5way rock-paper-scissor game with you!", true)
+                  .addField("! `rock, paper, scissors, lizard, or spock`", "I will play 5-way rock-paper-scissor game with you!", true)
                   .addField("!guess", "This is 5 unique guessing game against me. I will tell you # guesses that are right in terms of number and order", true)
                   .addField("!clock", "This is a survival strategy game. More rules are included inside the game", true)
                   .setColor(0xff00dc)

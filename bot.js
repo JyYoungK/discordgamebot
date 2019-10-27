@@ -26,7 +26,7 @@ bot.on('message', message => {
     if (message.channel.type === "dm") return;
     var mes = message.content.split(" ");
 
-if (mes[0] == "!guess") {
+  if (mes[0] == "!guess") {
     //Starting a new game
     if (num == 0) {
       message.reply(
@@ -45,24 +45,23 @@ if (mes[0] == "!guess") {
       );
     } else {
       for (var i = 0; i < 5; i++) {
-        if(mes[1][i] < 10){
+        if (mes[1][i] < 10) {
           number++;
         }
         for (var j = i + 1; j < 5; j++) {
           if (mes[1][i] == mes[1][j]) {
-              error++;
+            error++;
           }
         }
       }
 
-      if (error > 0 || mes[1].length > 5 || number < 5) {
+      if (error > 0 || mes[1].length > 5 || number != 5) {
         message.reply(
           "Oops! You have inputed a wrong guess! My numbers are composed of 5 unique numbers. Try again! "
         );
         error = 0;
         number = 0;
-      }
-      else {
+      } else {
         number = 0;
         for (var i = 0; i < 5; i++) {
           if (mes[1][i] == arr[i]) {
@@ -71,68 +70,66 @@ if (mes[0] == "!guess") {
         }
 
         for (var i = 0; i < 5; i++) {
-            for (var j = 0; j < 5; j++) {
-              if (mes[1][i] == arr[j] && i != j) {
-                correct++;
-              }
+          for (var j = 0; j < 5; j++) {
+            if (mes[1][i] == arr[j] && i != j) {
+              correct++;
             }
           }
-          guesses++;
+        }
+        guesses++;
 
-          if (perfect == 5) {
-            message.reply(
-              "Hurray! You did it! You took " + guesses + " tries."
+        if (perfect == 5) {
+          message.reply("Hurray! You did it! You took " + guesses + " tries.");
+          correct = 0;
+          perfect = 0;
+          guesses = 0;
+          number = 0;
+          num = 0;
+          arr = [];
+        } else if (correct == 0 && perfect == 0) {
+          message.channel.send("Wow! That is a joker! You got none right!");
+          correct = 0;
+          perfect = 0;
+        } else {
+          if (correct > 1 && perfect > 1)
+            message.channel.send(
+              "You got " +
+                correct +
+                " correct guesses and " +
+                perfect +
+                " perfect guesses"
             );
-            correct = 0;
-            perfect = 0;
-            guesses = 0;
-            number = 0;
-            num = 0;
-            arr = [];
-          } else if (correct == 0 && perfect == 0) {
-            message.channel.send("Wow! That is a joker! You got none right!");
-            correct = 0;
-            perfect = 0;
-          } else {
-            if (correct > 1 && perfect > 1)
-              message.channel.send(
-                "You got " +
-                  correct +
-                  " correct guesses and " +
-                  perfect +
-                  " perfect guesses"
-              );
 
-            if (correct > 1 && perfect <= 1)
-              message.channel.send(
-                "You got " +
-                  correct +
-                  " correct guesses and " +
-                  perfect +
-                  " perfect guess"
-              );
+          if (correct > 1 && perfect <= 1)
+            message.channel.send(
+              "You got " +
+                correct +
+                " correct guesses and " +
+                perfect +
+                " perfect guess"
+            );
 
-            if (perfect > 1 && correct <= 1)
-              message.channel.send(
-                "You got " +
-                  correct +
-                  " correct guess and " +
-                  perfect +
-                  " perfect guesses"
-              );
+          if (perfect > 1 && correct <= 1)
+            message.channel.send(
+              "You got " +
+                correct +
+                " correct guess and " +
+                perfect +
+                " perfect guesses"
+            );
 
-            if (correct <= 1 && perfect <= 1)
-              message.channel.send(
-                "You got " +
-                  correct +
-                  " correct guess and " +
-                  perfect +
-                  " perfect guess"
-              );
+          if (correct <= 1 && perfect <= 1)
+            message.channel.send(
+              "You got " +
+                correct +
+                " correct guess and " +
+                perfect +
+                " perfect guess"
+            );
 
-            correct = 0;
-            perfect = 0;
-          }
+          correct = 0;
+          perfect = 0;
+        }
       } //if not repeating number
     } //if numbers are generated
   }

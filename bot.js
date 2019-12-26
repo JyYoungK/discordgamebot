@@ -26,7 +26,7 @@ bot.on('message', message => {
     if (message.channel.type === "dm") return;
     var mes = message.content.split(" ");
 
-  if (mes[0] == "!guess") {
+    if (mes[0] == "!guess") {
     //Starting a new game
     if (num == 0) {
       message.reply(
@@ -37,6 +37,7 @@ bot.on('message', message => {
         if (arr.indexOf(num) === -1) arr.push(num);
       }
       guesses = 0;
+      var number = 0;
       message.channel.send(
         "# Correct guess means, there are # numbers that exists in my number but not in a correct order."
       );
